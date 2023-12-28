@@ -13,7 +13,7 @@ def f_func(u,theta):
     return u*theta
     
 def g_func(u,theta):
-    return theta + u*u
+    return theta*theta + u*u
 
 def dfdtheta_func(u,theta):
     return u
@@ -22,7 +22,7 @@ def dfdu_func(u,theta):
     return theta
 
 def dgdtheta_func(u,theta):
-    return 1
+    return 2*theta
 
 def dgdu_func(u,theta):
     return 2*u
@@ -47,6 +47,7 @@ def compute_totalcost(u, theta, g_func):
 #############################
 # testing functions
 ################################
+# test forward simulation
 def test1():
     timespan = 3
     theta_list = np.asarray([1,2,3])
@@ -65,6 +66,7 @@ def test1():
     theta_list = np.append(theta_list, 0)
     print("cost = {}".format(compute_totalcost(u_list,theta_list, g_func)))
 
+# test derivative computation
 def test2():
     timespan = 3
     theta_list = np.asarray([1,2,3])
@@ -90,7 +92,8 @@ def test2():
         lambda_list = np.append(lambda_list, lambda_last)
     lambda_list = lambda_list[::-1]
 
-    derivative = np.sum(dgdtheta_func(u_list,theta_list) + lambda_list * dfdtheta_func(u_list,theta_list))
+    theta_list = np.append(theta_list, 0)
+    derivative = dgdtheta_func(u_list,theta_list) + lambda_list * dfdtheta_func(u_list,theta_list)
     print("derivative = {}".format(derivative))
 
 if __name__ == '__main__':
