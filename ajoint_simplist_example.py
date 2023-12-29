@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pdb
 
-pdb.set_trace()
+#pdb.set_trace()
 ##################################
 # User define parameters
 #################################
@@ -70,6 +70,9 @@ def test1():
 def test2():
     timespan = 3
     theta_list = np.asarray([1,2,3])
+    theta_list = np.asarray([-0.5,-0.5,-0.5])
+    #theta_list = np.asarray([-3.25, -6.75, -9.0])
+     
     u_list = np.asarray([])
 
     # time loop
@@ -93,10 +96,13 @@ def test2():
     lambda_list = lambda_list[::-1]
 
     theta_list = np.append(theta_list, 0)
+    
+    print("cost = {}".format(compute_totalcost(u_list,theta_list, g_func)))
+
     derivative = dgdtheta_func(u_list,theta_list) + lambda_list * dfdtheta_func(u_list,theta_list)
     print("derivative = {}".format(derivative))
-
+    
 if __name__ == '__main__':
-    test1()
+    #test1()
     test2()
     
